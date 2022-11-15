@@ -87,7 +87,20 @@ public class ForumApplication {
 			Comment va7 = new Comment("dog best!", urepository.findByUsername("user"), threpository.findByName("Why dogs are the best:").get(0));
 			Comment va8 = new Comment("dog!", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
 			Comment va9 = new Comment("yeah!", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
-
+			Comment va11 = new Comment("I love watching breaking bad!", urepository.findByUsername("tome"), threpository.findByName("TV thread").get(0));
+			Comment va12 = new Comment("Better Call Saul is also good!", urepository.findByUsername("admin"), threpository.findByName("TV thread").get(0));
+			Comment va13 = new Comment("I don't watch TV", urepository.findByUsername("tome"), threpository.findByName("TV thread").get(0));
+			Comment va14 = new Comment("I wish I had a dog", urepository.findByUsername("tome"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va15 = new Comment("I have 3 dogs", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va16 = new Comment("dogs are so awesome!", urepository.findByUsername("user"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va17 = new Comment("they're so cute", urepository.findByUsername("tome"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va18 = new Comment("they're so cute", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va19 = new Comment("they're so cute", urepository.findByUsername("tome"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va20 = new Comment("they're so cute", urepository.findByUsername("user"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va21 = new Comment("they're so cute", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va22 = new Comment("they're so cute", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va23 = new Comment("they're so cute", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
+			Comment va24 = new Comment("they're so cute", urepository.findByUsername("alisa"), threpository.findByName("Why dogs are the best:").get(0));
 			
 
 			repository.save(va1);
