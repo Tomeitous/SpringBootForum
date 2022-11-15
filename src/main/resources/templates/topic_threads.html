@@ -1,0 +1,44 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Comments in thread</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />    
+</head>
+<body>
+User: <span sec:authentication="name"></span>
+<a th:href="@{/logout}">Logout</a>
+<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
+     <a class="btn btn-success" href="/topiclist">Return to topics</a>
+	<table class="table table-striped">
+		<tr>
+		    <th>ID</th>
+		    <th>Name</th>
+		    <th>Date</th>
+		    <th>Time</th>
+		    <th>Link</th>
+		    <th>User</th>
+		      <th sec:authorize="hasRole('ADMIN')">Delete</th>
+		    <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+
+
+		</tr>
+    	<th:block th:each = "topic : ${topic}">		
+			<tr th:each="thread : ${topic.threads}">
+				<td th:text="${thread.threadId}" />
+				<td th:text="${thread.name}"/>
+				<td th:text="${#dates.format(thread.dateCreated, 'dd.MM.yyyy')}"></td> 
+				<td th:text="${#dates.format(thread.dateCreated, 'HH:mm:ss')}"></td> 
+				<td><a class="btn btn-success" th:href="@{/thread_comments/{id} (id=${thread.threadId})}">Threads comments</a></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/deletethread/{id}(id=${thread.threadId})}">🗑️</a></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/editthread/{id}(id=${thread.threadId})}">✏️</a></td>
+    	
+    		
+    	</th:block>
+
+     </table>
+      <a class="btn btn-success" href="/addthread">Add threads</a>
+</body>
+</html>

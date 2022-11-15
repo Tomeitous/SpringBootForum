@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>Add comment</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+   </head>
+   <body>
+      <h1>Add Comment</h1>
+      <div>
+         <form th:object="${comment}" th:action="@{save}" action="#" method="post">
+            <label for="text">Text:</label>
+            <div style="clear: both; display: block; height: 1px;"></div>
+            <textarea th:field="*{text}" id="text" name="text" rows="4" cols="25"></textarea>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Can't be empty</div>
+               <div style="clear: both; display: block; height: 10px;"></div>
+               <label for="userlist">Thread</label>
+            <div style="clear: both; display: block; height: 1px;"></div>
+            <select id="catlist" th:field="*{thread}">
+               <option th:each="thread: ${thread}" th:value="${thread.threadId}" th:text="${thread.name} "></option>
+            </select>
+            			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="userlist">User</label>
+			<div style="clear: both; display: block; height: 1px;"></div>
+            <select id="userlist" th:field="*{user}">
+               <option th:each="user: ${user}" th:value="${user.id}" th:text="${user.username}"></option>
+            </select>
+            <div style="clear: both; display: block; height: 10px;"></div>
+            <input class="btn btn-success" type="submit" value="Save"></input>
+         </form>
+      </div>
+   </body>
+</html>

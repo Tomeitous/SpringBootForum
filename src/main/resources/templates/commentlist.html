@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Comment List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />    
+</head>
+<body>
+User: <span sec:authentication="name"></span>
+<a th:href="@{/logout}">Logout</a>
+
+<h3 th:inline="text">All comments from all threads</h3>
+
+
+
+
+	<table class="table table-striped" style="  width: 100%;
+  table-layout: fixed;
+		    ">
+		<tr>
+		    <th>In a thread</th>
+		    <th>Text</th>
+		    <th>User</th>
+		    <th>Posted</th>
+		    <th>Thread</th>
+		    <th>Delete</th>
+		    <th>Edit</th>
+		    
+
+
+		</tr>
+    	<tr th:each = "comment : ${comment}">
+    	<td th:text="${comment.thread.name}"></td>
+    		<td th:text="${comment.text}"></td>
+    		<td th:text="${comment.user.username}"></td>
+    		<td th:text="${#dates.format(comment.dateCreated, 'HH:mm:ss')}"></td> 
+    		<td th:text="${comment.thread.name}"></td>
+    		<td th:if="${#authentication.name}==${comment.user.username} or ${#authorization.expression('hasAuthority(''ADMIN'')')}"> <a class="btn btn-danger" th:href="@{/delete/{id}(id=${comment.id})}">🗑️</a></td>
+    		<td th:unless="${#authentication.name}==${comment.user.username} or ${#authorization.expression('hasAuthority(''ADMIN'')')}"> &nbsp; </td>
+    		<td th:if="${#authentication.name}==${comment.user.username} or ${#authorization.expression('hasAuthority(''ADMIN'')')}"> <a class="btn btn-success" th:href="@{/edit/{id}(id=${comment.id})}">✏️</a></td>
+    		<td th:unless="${#authentication.name}==${comment.user.username} or ${#authorization.expression('hasAuthority(''ADMIN'')')}"> &nbsp; </td>
+    	</tr>
+     </table>
+     <a class="btn btn-success" href="/add">Add comments</a>
+          <a class="btn btn-success" href="/threadlist">Topic list</a>
+</body>
+</html>

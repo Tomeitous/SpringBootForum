@@ -1,0 +1,38 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Topiclist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />    
+</head>
+<body>
+User: <span sec:authentication="name"></span>
+<a th:href="@{/logout}">Logout</a>
+<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
+
+	<table class="table table-striped">
+		<tr>
+		    <th>ID</th>
+		    <th>Name</th>
+		    <th>Topic threads</th>
+		    <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+		    <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+	
+		    
+		    
+		</tr>
+    	<tr th:each = "topic : ${topic}">
+    		<td th:text="${topic.id}"></td>
+    		<td th:text="${topic.name}"></td> 
+    		<td><a class="btn btn-success" th:href="@{/topic_threads/{id} (id=${topic.id})}">Topics threads</a></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/deletetopic/{id}(id=${topic.id})}">🔥</a></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/edittopic/{id}(id=${topic.id})}">✏️</a></td>
+    	
+    	</tr>
+     </table>
+     <a class="btn btn-success" href="/addtopic">Add Topic</a>
+       <a class="btn btn-success" href="/threadlist">All Threads</a>
+</body>
+</html>

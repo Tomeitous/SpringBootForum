@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Topic</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Add Thread</h1>
+	<div>
+		<form th:object="${thread}" th:action="@{savethread}" action="#" method="post">
+		  	<label for="name">Name</label>
+			<input type="text" id="name" th:field="*{name}" />
+						<label for="catlist">Topic</label>
+				<select id="catlist" th:field="*{topic}">
+					<option th:each="topic: ${topic}" th:value="${topic.id}" th:text="${topic.name}"></option>
+				</select>
+			 
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input class="btn btn-success" type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>

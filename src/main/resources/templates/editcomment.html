@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Comment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Edit Comment</h1>
+	<div>
+
+		<form th:object="${comment}" th:action="@{../save}" action="#" method="post">
+			<label for="id"></label>
+				<label for="text">Text</label>
+			<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
+		  	<textarea th:field="*{text}" id="text" name="text" rows="4" cols="25"></textarea>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="thread"></label>
+			<input type="hidden" id="thread" th:field="*{thread.threadId}"readonly="readonly" />
+			<label for="user">User</label>
+			 
+				<input type="text" id="user" th:field="*{user.username}" readonly="readonly" />
+				
+
+			 <label for="user"></label>
+			<input type="hidden" id="user" th:field="*{user}" readonly="readonly" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<br>
+			<input type="submit" class="btn btn-success"value="Save ✓"></input>
+		</form>
+	</div>
+</body>
+</html>

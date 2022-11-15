@@ -1,0 +1,46 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Comments in thread</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/skeleton.min.css" th:href="@{/css/skeleton.min.css}" />    
+</head>
+<body>
+User: <span sec:authentication="name"></span>
+<a th:href="@{/logout}">Logout</a>
+<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
+
+		<table class="table table-striped" >
+		<tr>
+		    <th>ID</th>
+		    <th style="  width: 25%;
+  table-layout: fixed; 
+		    ">Text</th>
+		    <th>User</th>
+		    <th>Posted</th>
+		      <th sec:authorize="hasRole('ADMIN')">Delete</th>
+		    <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+
+
+		</tr>
+    	<th:block th:each = "thread : ${thread}">	
+			<tr th:each="comment : ${thread.comments}">
+    			<td th:text="${comment.id}"/>
+    			<td th:text="${comment.text}"/>
+    			<td th:text="${comment.user.username}"/>
+    			<td th:text="${#dates.format(comment.dateCreated, 'HH:mm:ss')}"></td> 
+    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${comment.id})}">🗑️</a></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/edit/{id}(id=${comment.id})}">✏️</a></td>
+    			
+    		</tr>
+    		
+    	</th:block>
+
+     </table>
+
+      <a class="btn btn-success" href="/add">Add comments</a>
+     <a class="btn btn-success" href="/threadlist">Return</a>
+</body>
+</html>
