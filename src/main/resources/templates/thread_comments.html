@@ -20,8 +20,8 @@ User: <span sec:authentication="name"></span>
 		    ">Text</th>
 		    <th>User</th>
 		    <th>Posted</th>
-		      <th sec:authorize="hasRole('ADMIN')">Delete</th>
-		    <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+		    <th>Delete</th>
+		    <th>Edit</th>
 
 
 		</tr>
@@ -31,8 +31,8 @@ User: <span sec:authentication="name"></span>
     			<td th:text="${comment.text}"/>
     			<td th:text="${comment.user.username}"/>
     			<td th:text="${#dates.format(comment.dateCreated, 'HH:mm:ss')}"></td> 
-    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${comment.id})}">🗑️</a></td>
-    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" th:href="@{/edit/{id}(id=${comment.id})}">✏️</a></td>
+    		<td th:if="${#authentication.name}==${comment.user.username} or ${#authorization.expression('hasAuthority(''ADMIN'')')}"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${comment.id})}">🗑️</a></td>
+    		<td th:if="${#authentication.name}==${comment.user.username} or ${#authorization.expression('hasAuthority(''ADMIN'')')}"><a class="btn btn-success" th:href="@{/edit/{id}(id=${comment.id})}">✏️</a></td>
     			
     		</tr>
     		
